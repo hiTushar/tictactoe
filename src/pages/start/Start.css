@@ -1,0 +1,114 @@
+.mn-start {
+    background: url('../../assets/base.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.mn-start__board1 {
+    position: absolute;
+    inset: 0;
+    background: url('../../assets/board1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.mn-start__board2 {
+    position: absolute;
+    inset: 0;
+    background: url('../../assets/board2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.mn-start__text {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    mix-blend-mode: multiply;
+}
+
+.mn-start__title {
+    color: #ad9576;
+    text-align: center;
+    font-family: Eczar;
+    font-size: 49px; /* responsive font sizing */
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.mn-start__desc {
+    color: #321F04;
+    text-align: center;
+    font-family: Eczar;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.mn-start__action {
+    position: absolute;
+}
+
+.mn-start__action {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mn-action__text {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.46px;
+    text-transform: uppercase;
+
+}
+
+.mn-action__button {
+    position: relative;
+    width: 100%;
+}
+
+.mn-button__notch {
+    position: absolute;
+    display: flex;
+    &>img {
+        width: 100%;
+    }
+}
+
+.mn-button__select {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mn-select__opt {
+    display: flex;
+    justify-content: center;
+
+    &>img {
+        width: 90%;
+        height: 90%;
+        object-fit: cover;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

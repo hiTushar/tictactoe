@@ -1,0 +1,11 @@
+.app {
+  width: 35%;
+  min-width: 320px;
+  aspect-ratio: 0.64;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
+  overflow: hidden;
+}
