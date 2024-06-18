@@ -4,15 +4,18 @@ import './App.css'
 import Start from './pages/start/Start'
 import Game from './pages/game/Game'
 import Over from './pages/over/Over';
+import { TurnProvider } from './context/TurnContext';
 
 function App() {
   return (
     <div className='app'>
-      <Routes>
-        <Route path='/' element={<Start />} />
-        <Route path='/game' element={<Game />} />
-        <Route path='/over' element={<Over />} />
-      </Routes>
+      <TurnProvider>
+        <Routes>
+          <Route path='/' element={<Start />} />
+          <Route path='/game' element={<Game />} />
+          <Route path='/over' element={<Over />} />
+        </Routes>
+      </TurnProvider>
     </div>
   )
 }

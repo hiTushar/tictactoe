@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Start.css';
 import { notch, x, o } from '../../assets/assets';
+import { TurnContext } from '../../context/TurnContext';
 
 const Start = () => {
+  const { setTurn } = useContext(TurnContext);
+
   return (
     <div className='mn-start'>
         <div className='mn-start__board1'></div>
@@ -18,10 +21,10 @@ const Start = () => {
                     <img src={notch} alt='notch' />
                 </div>
                 <div className='mn-button__select'>
-                    <div className='mn-select__opt'>
+                    <div className='mn-select__opt' onClick={() => setTurn('x')}>
                         <img src={x} alt='x' />
                     </div>
-                    <div className='mn-select__opt'>
+                    <div className='mn-select__opt' onClick={() => setTurn('o')}>
                         <img src={o} alt='o' />
                     </div>
                 </div>
