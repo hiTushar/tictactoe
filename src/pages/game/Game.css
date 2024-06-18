@@ -1,0 +1,103 @@
+.op-game {
+    background: url('../../assets/base.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.op-game__turn {
+    width: 20%;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    mix-blend-mode: multiply;
+    
+}
+
+.op-turn__option {
+    width: 100%;
+    display: flex;
+    & > img {
+        width: 100%;
+    }
+}
+
+.op-turn__text {
+    color: hsla(34, 40%, 86%, 0.64);
+    text-align: center;
+    font-family: Eczar;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 6px #fff, 0 0 1px #1c1919, 3px 3px 6px #fff; 
+}
+
+.op-game__board {
+    position: absolute;
+    width: 80%;
+    aspect-ratio: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(-3px -3px 10px rgba(0, 0, 0, 0.5))
+    drop-shadow(-5px 5px 10px rgba(5, 5, 3, 0.8));
+}
+
+.op-board__base {
+    position: absolute;
+    width: 100%;
+
+    & > img {
+        width: 100%;
+    }
+}
+
+.op-board__play {
+    width: 65%;
+    aspect-ratio: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    filter: drop-shadow(-3.291px 5.976px 14px rgba(26, 5, 5, 0.46)) 
+    drop-shadow(-2.529px 3.764px 8.991px rgba(26, 5, 5, 0.35)) 
+    drop-shadow(-2.331px 3.811px 4.593px rgba(26, 5, 5, 0.28)) 
+    drop-shadow(-1.628px 2.018px 2.75px  rgba(26, 5, 5, 0.23)) 
+    drop-shadow(-1.353px 1.288px 1.407px rgba(26, 5, 5, 0.18)) 
+    drop-shadow(-1.438px 1.522px 5.509px  rgba(26, 5, 5, 0.11));
+}
+
+.op-play__image {
+    position: absolute;
+    & > img {
+        width: 100%;
+    }
+}
+
+.op-play__map {
+    width: 100%;
+    aspect-ratio: 1;
+    position: absolute;
+    z-index: 2;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+
+.op-map__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > img {
+        width: 100%;
+    }
+}

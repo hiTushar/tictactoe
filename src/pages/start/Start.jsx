@@ -1,10 +1,17 @@
 import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './Start.css';
 import { notch, x, o } from '../../assets/assets';
 import { TurnContext } from '../../context/TurnContext';
 
 const Start = () => {
-  const { setTurn } = useContext(TurnContext);
+  const { turnNext } = useContext(TurnContext);
+  const navigate = useNavigate();
+
+  const startGame = (choice) => {
+    turnNext(choice);
+    navigate('/game');
+  }
 
   return (
     <div className='mn-start'>
@@ -21,10 +28,10 @@ const Start = () => {
                     <img src={notch} alt='notch' />
                 </div>
                 <div className='mn-button__select'>
-                    <div className='mn-select__opt' onClick={() => setTurn('x')}>
+                    <div className='mn-select__opt' onClick={() => startGame('x')}>
                         <img src={x} alt='x' />
                     </div>
-                    <div className='mn-select__opt' onClick={() => setTurn('o')}>
+                    <div className='mn-select__opt' onClick={() => startGame('o')}>
                         <img src={o} alt='o' />
                     </div>
                 </div>
