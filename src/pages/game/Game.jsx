@@ -1,37 +1,94 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Game.css';
-import { TurnContext } from '../../context/TurnContext';
+import { GameContext } from '../../context/GameContext';
 import { x, o, board3, playArea } from '../../assets/assets';
 
-const gameInitState = ['', '', '', '', '', '', '', '', ''];
+const gameInitState = [null, null, null, null, null, null, null, null, null];
+// const ROW_LENGTH = 3;
+// let turnPt = {
+//     'x': -1,
+//     'o': 1
+// }
 
 const Game = () => {
-    const { turn, turnNext } = useContext(TurnContext);
+    const { turn, turnNext, winner, winnerFound } = useContext(GameContext);
     const [board, setBoard] = useState(gameInitState);
+    const turnCount = useRef(0);
+
+    useEffect(() => {
+        if (turnCount.current > 0) {
+            checkWinner(board);
+        }
+    }, [board])
 
     const drawGrid = (board) => {
         return (
             board.map((cell, idx) => (
-                <div key={idx} className={`op-map__cell ${cell !== '' ? 'disable' : ''}`} onClick={cell === '' ? () => putMark(idx) : null}>
-                    {cell === '' ? null : <img src={cell === 'x' ? x : o} alt={'mark'} />}
+                <div key={idx} className={`op-map__cell ${cell !== null ? 'disable' : ''}`} onClick={cell === null ? () => putMark(idx) : null}>
+                    {cell === null ? null : <img src={cell === 'x' ? x : o} alt={'mark'} />}
                 </div>
             ))
         )
     }
 
     const putMark = (index) => {
+        turnCount.current++;
         setBoard(prev => {
             const newBoard = [...prev];
             newBoard[index] = turn;
             return newBoard;
         })
-
-        turnNext(turn === 'x' ? 'o' : 'x');
     }
 
-    console.log(board, turn);
+    const checkWinner = (newBoard) => {
+        // let rowMatch = 0, colMatch = 0, diag1Match = 0, diag2Match = 0;
+        // for(let i = 0; i < ROW_LENGTH ; i++) {
+        //     if(board[i] === '') continue;
+        //     diag1Match += turnPt[board[(ROW_LENGTH + 1) * i]];
+        //     diag2Match += turnPt[board[(ROW_LENGTH - 1) * (i + 1)]];
+
+        //     rowMatch = 0;
+        //     colMatch = 0;
+        //     for(let j = 0; j < ROW_LENGTH; j++) {
+        //         rowMatch += turnPt[board[i * ROW_LENGTH + j]];
+        //         colMatch += turnPt[board[j * ROW_LENGTH + i]];
+        //     }
+
+        //     if(rowMatch === ROW_LENGTH || colMatch === ROW_LENGTH || diag1Match === ROW_LENGTH || diag2Match === ROW_LENGTH) {
+        //         setWinner('x');
+        //     }
+        //     else if(rowMatch === -ROW_LENGTH || colMatch === -ROW_LENGTH || diag1Match === -ROW_LENGTH || diag2Match === -ROW_LENGTH) {
+        //         setWinner('o');
+        //     }
+        // }
+        if ((newBoard[0] && newBoard[0] === newBoard[1] && newBoard[1] === newBoard[2]) // Row 1
+            || (newBoard[3] && newBoard[3] === newBoard[4] && newBoard[4] === newBoard[5]) // Row 2
+            || (newBoard[6] && newBoard[6] === newBoard[7] && newBoard[7] === newBoard[8]) // Row 3
+            || (newBoard[0] && newBoard[0] === newBoard[3] && newBoard[3] === newBoard[6]) // Col 1
+            || (newBoard[1] && newBoard[1] === newBoard[4] && newBoard[4] === newBoard[7]) // Col 2
+            || (newBoard[2] && newBoard[2] === newBoard[5] && newBoard[5] === newBoard[8]) // Col 3
+            || (newBoard[0] && newBoard[0] === newBoard[4] && newBoard[4] === newBoard[8]) // Diag 1
+            || (newBoard[2] && newBoard[2] === newBoard[4] && newBoard[4] === newBoard[6])) // Diag 2 
+        {
+            winnerFound(turn);
+        }
+        else if (turnCount.current === 9) {
+            winnerFound('draw');
+        }
+        else {
+            turnNext(turn === 'x' ? 'o' : 'x');
+        }
+    }
+    console.log(winner);
     return (
         <div className='op-game'>
+            {
+                winner && (
+                    <div className='op-game__winner'>
+                        
+                    </div>
+                )
+            }
             <div className='op-game__turn'>
                 <div className='op-turn__option'>
                     <img src={turn === 'x' ? x : o} alt={'turn'} />
@@ -51,6 +108,7 @@ const Game = () => {
                 </div>
             </div>
             <div className='op-game__logo'></div>
+
         </div>
     )
 }

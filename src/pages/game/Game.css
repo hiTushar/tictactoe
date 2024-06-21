@@ -6,6 +6,14 @@
     position: relative;
 }
 
+.op-game__winner {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-color: black;
+    opacity: 0.5;
+}
+
 .op-game__turn {
     width: 20%;
     position: absolute;
@@ -49,6 +57,10 @@
     transform: translate(-50%, -50%);
     filter: drop-shadow(-3px -3px 10px rgba(0, 0, 0, 0.5))
     drop-shadow(-5px 5px 10px rgba(5, 5, 3, 0.8));
+}
+
+.op-game__winner {
+
 }
 
 .op-board__base {

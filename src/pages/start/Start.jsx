@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './Start.css';
 import { notch, x, o } from '../../assets/assets';
-import { TurnContext } from '../../context/TurnContext';
+import { GameContext } from '../../context/GameContext';
 
 const Start = () => {
-  const { turnNext } = useContext(TurnContext);
+  const { turnNext } = useContext(GameContext);
   const navigate = useNavigate();
 
   const startGame = (choice) => {
