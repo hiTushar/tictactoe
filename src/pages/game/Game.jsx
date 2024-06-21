@@ -3,22 +3,33 @@ import './Game.css';
 import { TurnContext } from '../../context/TurnContext';
 import { x, o, board3, playArea } from '../../assets/assets';
 
-const gameInitState = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
+const gameInitState = ['', '', '', '', '', '', '', '', ''];
 
 const Game = () => {
-    const { turn } = useContext(TurnContext);
+    const { turn, turnNext } = useContext(TurnContext);
     const [board, setBoard] = useState(gameInitState);
 
     const drawGrid = (board) => {
         return (
-            board.map((cell, idx) => (    
-                <div key={idx} className='op-map__cell'>
-                    {cell === 'x' ? <img src={x} alt={'x'} /> : <img src={o} alt={'o'} />}
+            board.map((cell, idx) => (
+                <div key={idx} className={`op-map__cell ${cell !== '' ? 'disable' : ''}`} onClick={cell === '' ? () => putMark(idx) : null}>
+                    {cell === '' ? null : <img src={cell === 'x' ? x : o} alt={'mark'} />}
                 </div>
             ))
         )
     }
 
+    const putMark = (index) => {
+        setBoard(prev => {
+            const newBoard = [...prev];
+            newBoard[index] = turn;
+            return newBoard;
+        })
+
+        turnNext(turn === 'x' ? 'o' : 'x');
+    }
+
+    console.log(board, turn);
     return (
         <div className='op-game'>
             <div className='op-game__turn'>
