@@ -8,10 +8,72 @@
 
 .op-game__winner {
     position: absolute;
-    inset: 0;
-    z-index: 2;
-    background-color: black;
-    opacity: 0.5;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10%;
+}
+
+.op-winner__board {
+    width: 100%;
+    height: 50%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.op-board__img {
+    position: relative;
+
+    &>img {
+        position: absolute;
+        width: 100%;
+
+        &:nth-child(2) {
+            width: 98%;
+            margin-top: 3%;
+        }
+    }
+}
+
+.op-body__icon {
+    position: relative;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    padding-block: 5%;
+    
+    &>img {
+        margin-top: 2%;
+        height: 100%;
+    }
+
+    &.hide {
+        opacity: 0;
+    }
+}
+
+.op-body__text {
+    position: relative;
+
+    color: #ad9576;
+    text-align: center;
+    font-family: Eczar;
+    font-size: 33px; /* responsive font sizing */
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    mix-blend-mode: multiply;
+}
+
+.op-body__button {
+    position: relative;
+    padding: 5% 30%;
+    cursor: pointer;
+    &>img {
+        width: 100%;
+    }
 }
 
 .op-game__turn {
@@ -25,13 +87,13 @@
     align-items: center;
     justify-content: center;
     mix-blend-mode: multiply;
-    
 }
 
 .op-turn__option {
     width: 100%;
     display: flex;
-    & > img {
+
+    &>img {
         width: 100%;
     }
 }
@@ -45,7 +107,7 @@
     font-weight: 700;
     line-height: 1;
     text-transform: uppercase;
-    text-shadow: 3px 3px 6px #fff, 0 0 1px #1c1919, 3px 3px 6px #fff; 
+    text-shadow: 3px 3px 6px #fff, 0 0 1px #1c1919, 3px 3px 6px #fff;
 }
 
 .op-game__board {
@@ -55,19 +117,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    filter: drop-shadow(-3px -3px 10px rgba(0, 0, 0, 0.5))
-    drop-shadow(-5px 5px 10px rgba(5, 5, 3, 0.8));
+    filter: drop-shadow(-3px -3px 10px rgba(0, 0, 0, 0.5)) drop-shadow(-5px 5px 10px rgba(5, 5, 3, 0.8));
 }
 
-.op-game__winner {
-
-}
+.op-game__winner {}
 
 .op-board__base {
     position: absolute;
     width: 100%;
 
-    & > img {
+    &>img {
         width: 100%;
     }
 }
@@ -78,19 +137,15 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 2;
-    filter: drop-shadow(-3.291px 5.976px 14px rgba(26, 5, 5, 0.46)) 
-    drop-shadow(-2.529px 3.764px 8.991px rgba(26, 5, 5, 0.35)) 
-    drop-shadow(-2.331px 3.811px 4.593px rgba(26, 5, 5, 0.28)) 
-    drop-shadow(-1.628px 2.018px 2.75px  rgba(26, 5, 5, 0.23)) 
-    drop-shadow(-1.353px 1.288px 1.407px rgba(26, 5, 5, 0.18)) 
-    drop-shadow(-1.438px 1.522px 5.509px  rgba(26, 5, 5, 0.11));
+    filter: drop-shadow(-3.291px 5.976px 14px rgba(26, 5, 5, 0.46)) drop-shadow(-2.529px 3.764px 8.991px rgba(26, 5, 5, 0.35)) drop-shadow(-2.331px 3.811px 4.593px rgba(26, 5, 5, 0.28)) drop-shadow(-1.628px 2.018px 2.75px rgba(26, 5, 5, 0.23)) drop-shadow(-1.353px 1.288px 1.407px rgba(26, 5, 5, 0.18)) drop-shadow(-1.438px 1.522px 5.509px rgba(26, 5, 5, 0.11));
 }
 
 .op-play__image {
     position: absolute;
-    & > img {
+
+    &>img {
         width: 100%;
     }
 }
@@ -110,7 +165,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    & > img {
+
+    &>img {
         width: 100%;
     }
 

@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Game.css';
 import { GameContext } from '../../context/GameContext';
-import { x, o, board3, playArea } from '../../assets/assets';
+import { x, o, board3, board4, playArea, border, button } from '../../assets/assets';
+import { useNavigate } from 'react-router-dom';
 
 const gameInitState = [null, null, null, null, null, null, null, null, null];
 // const ROW_LENGTH = 3;
@@ -14,6 +15,7 @@ const Game = () => {
     const { turn, turnNext, winner, winnerFound } = useContext(GameContext);
     const [board, setBoard] = useState(gameInitState);
     const turnCount = useRef(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (turnCount.current > 0) {
@@ -79,13 +81,47 @@ const Game = () => {
             turnNext(turn === 'x' ? 'o' : 'x');
         }
     }
-    console.log(winner);
+
+    const resetGame = () => {
+        setBoard(gameInitState);
+        turnCount.current = 0;  
+        turnNext('x');
+        winnerFound(null);
+        navigate('/');
+    }
+
     return (
         <div className='op-game'>
             {
                 winner && (
                     <div className='op-game__winner'>
-                        
+                        <div className='op-winner__board'>
+                            <div className='op-board__img'>
+                                <img src={board4} alt='board4' />
+                                <img src={border} alt='border' />
+                            </div>
+                            <div className={`op-body__icon ${winner === 'draw' ? 'hide' : ''}`}>
+                                <img src={winner === 'x' ? x : o} alt={'winner'} />
+                            </div>
+                            <div className='op-body__text'>
+                                {
+                                    winner !== 'draw' ? (
+                                        <>
+                                            is the<br /> winner
+                                        </>
+                                    )  : (
+                                        <>
+                                            It's a Draw!!
+                                        </>
+                                    )
+
+                                }
+                            </div>
+                            <div className='op-body__button' onClick={resetGame}>
+                                <img src={button} alt={'button'} />
+                            </div>
+
+                        </div>
                     </div>
                 )
             }
