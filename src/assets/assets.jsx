@@ -1,14 +1,14 @@
-import base from './base.png';
-import board1 from './board1.png';
-import board2 from './board2.png';
-import board3 from './board3.png';
-import board4 from './board4.png';
-import border from './border.png';
-import playArea from './play_area.png';
-import notch from './notch.png';
-import x from './x.png';
-import o from './o.png';
-import button from './button.png';
+import base from './base.webp';
+import board1 from './board1.webp';
+import board2 from './board2.webp';
+import board3 from './board3.webp';
+import board4 from './board4.webp';
+import border from './border.webp';
+import playArea from './play_area.webp';
+import notch from './notch.webp';
+import x from './x.webp';
+import o from './o.webp';
+import button from './button.webp';
 
 export {
     base,
