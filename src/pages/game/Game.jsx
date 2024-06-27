@@ -4,6 +4,7 @@ import { GameContext } from '../../context/GameContext';
 import { x, o, board3, board4, playArea, border, button } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import lunchTime from '../../assets/audio/lunchTime.mp3';
+import woodHit from '../../assets/audio/woodHit.mp3';
 
 const gameInitState = [null, null, null, null, null, null, null, null, null];
 // const ROW_LENGTH = 3;
@@ -17,11 +18,12 @@ const Game = () => {
     const [board, setBoard] = useState(gameInitState);
     const turnCount = useRef(0);
     const navigate = useNavigate();
-    const lunchTimeSound = new Audio(lunchTime);
+    let lunchTimeSound = useRef(new Audio(lunchTime));
+    let woodHitSound = useRef(new Audio(woodHit));
 
     useEffect(() => {
-        lunchTimeSound.play();
-        lunchTimeSound.loop = true;
+        lunchTimeSound.current.play();
+        lunchTimeSound.current.loop = true;
     }, [])
 
     useEffect(() => {
@@ -42,6 +44,7 @@ const Game = () => {
 
     const putMark = (index) => {
         turnCount.current++;
+        woodHitSound.current.play();
         setBoard(prev => {
             const newBoard = [...prev];
             newBoard[index] = turn;
@@ -80,9 +83,11 @@ const Game = () => {
             || (newBoard[2] && newBoard[2] === newBoard[4] && newBoard[4] === newBoard[6])) // Diag 2 
         {
             winnerFound(turn);
+            lunchTimeSound.current.pause();
         }
         else if (turnCount.current === 9) {
             winnerFound('draw');
+            lunchTimeSound.current.pause();
         }
         else {
             turnNext(turn === 'x' ? 'o' : 'x');
