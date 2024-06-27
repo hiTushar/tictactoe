@@ -137,9 +137,22 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
     z-index: 2;
     filter: drop-shadow(-3.291px 5.976px 14px rgba(26, 5, 5, 0.46)) drop-shadow(-2.529px 3.764px 8.991px rgba(26, 5, 5, 0.35)) drop-shadow(-2.331px 3.811px 4.593px rgba(26, 5, 5, 0.28)) drop-shadow(-1.628px 2.018px 2.75px rgba(26, 5, 5, 0.23)) drop-shadow(-1.353px 1.288px 1.407px rgba(26, 5, 5, 0.18)) drop-shadow(-1.438px 1.522px 5.509px rgba(26, 5, 5, 0.11));
+    animation-name: rotate_board;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotate_board {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .op-play__image {

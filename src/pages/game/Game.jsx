@@ -3,6 +3,7 @@ import './Game.css';
 import { GameContext } from '../../context/GameContext';
 import { x, o, board3, board4, playArea, border, button } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
+import lunchTime from '../../assets/audio/lunchTime.mp3';
 
 const gameInitState = [null, null, null, null, null, null, null, null, null];
 // const ROW_LENGTH = 3;
@@ -16,6 +17,12 @@ const Game = () => {
     const [board, setBoard] = useState(gameInitState);
     const turnCount = useRef(0);
     const navigate = useNavigate();
+    const lunchTimeSound = new Audio(lunchTime);
+
+    useEffect(() => {
+        lunchTimeSound.play();
+        lunchTimeSound.loop = true;
+    }, [])
 
     useEffect(() => {
         if (turnCount.current > 0) {
