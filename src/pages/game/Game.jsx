@@ -20,6 +20,8 @@ const Game = () => {
     const navigate = useNavigate();
     let lunchTimeSound = useRef(new Audio(lunchTime));
     let woodHitSound = useRef(new Audio(woodHit));
+    let xoRef = useRef(null);
+    let winSequenceRef = useRef([null, null, null, null, null, null, null, null]);
 
     useEffect(() => {
         lunchTimeSound.current.play();
@@ -36,7 +38,7 @@ const Game = () => {
         return (
             board.map((cell, idx) => (
                 <div key={idx} className={`op-map__cell ${cell !== null ? 'disable' : ''}`} onClick={cell === null ? () => putMark(idx) : null}>
-                    {cell === null ? null : <img src={cell === 'x' ? x : o} alt={'mark'} />}
+                    {cell === null ? null : <img src={cell === 'x' ? x : o} alt={'mark'} ref={xoRef} />}
                 </div>
             ))
         )
@@ -73,21 +75,29 @@ const Game = () => {
         //         setWinner('o');
         //     }
         // }
-        if ((newBoard[0] && newBoard[0] === newBoard[1] && newBoard[1] === newBoard[2]) // Row 1
-            || (newBoard[3] && newBoard[3] === newBoard[4] && newBoard[4] === newBoard[5]) // Row 2
-            || (newBoard[6] && newBoard[6] === newBoard[7] && newBoard[7] === newBoard[8]) // Row 3
-            || (newBoard[0] && newBoard[0] === newBoard[3] && newBoard[3] === newBoard[6]) // Col 1
-            || (newBoard[1] && newBoard[1] === newBoard[4] && newBoard[4] === newBoard[7]) // Col 2
-            || (newBoard[2] && newBoard[2] === newBoard[5] && newBoard[5] === newBoard[8]) // Col 3
-            || (newBoard[0] && newBoard[0] === newBoard[4] && newBoard[4] === newBoard[8]) // Diag 1
-            || (newBoard[2] && newBoard[2] === newBoard[4] && newBoard[4] === newBoard[6])) // Diag 2 
-        {
-            winnerFound(turn);
+        let Row1 = newBoard[0] && newBoard[0] === newBoard[1] && newBoard[1] === newBoard[2];
+        let Row2 = newBoard[3] && newBoard[3] === newBoard[4] && newBoard[4] === newBoard[5];
+        let Row3 = newBoard[6] && newBoard[6] === newBoard[7] && newBoard[7] === newBoard[8];
+        let Col1 = newBoard[0] && newBoard[0] === newBoard[3] && newBoard[3] === newBoard[6];
+        let Col2 = newBoard[1] && newBoard[1] === newBoard[4] && newBoard[4] === newBoard[7];
+        let Col3 = newBoard[2] && newBoard[2] === newBoard[5] && newBoard[5] === newBoard[8];
+        let Diag1 = newBoard[0] && newBoard[0] === newBoard[4] && newBoard[4] === newBoard[8];
+        let Diag2 = newBoard[2] && newBoard[2] === newBoard[4] && newBoard[4] === newBoard[6];
+        winSequenceRef.current = [Row1, Row2, Row3, Col1, Col2, Col3, Diag1, Diag2];
+
+        if (Row1 || Row2 || Row3 || Col1 || Col2 || Col3 || Diag1 || Diag2) {
+            setTimeout(() => {
+                winnerFound(turn);
+            }, 1000)
             lunchTimeSound.current.pause();
+            stopBoardAnimation();
+            strikeThrough(winSequenceRef.current);
+
         }
         else if (turnCount.current === 9) {
             winnerFound('draw');
             lunchTimeSound.current.pause();
+            stopBoardAnimation();
         }
         else {
             turnNext(turn === 'x' ? 'o' : 'x');
@@ -100,6 +110,26 @@ const Game = () => {
         turnNext('x');
         winnerFound(null);
         navigate('/');
+    }
+
+    const stopBoardAnimation = () => {
+        let board = document.getElementsByClassName('op-board__play')[0];
+        board.style.animationPlayState = 'paused';
+        board.style.transform = 'translate(-50%, -50%)';
+
+        let allCells = Array.from(document.getElementsByClassName('op-map__cell'));
+        for(let i = 0; i < allCells.length; i++) {
+            if(allCells[i].classList.contains('disable')) {
+                allCells[i].querySelector('img').style.animationPlayState = 'paused';
+            }
+        }
+
+        let turnIndicator = document.getElementsByClassName('op-turn__option')[0];
+        turnIndicator.style.animationPlayState = 'paused';
+    }   
+
+    const strikeThrough = (sequence) => {
+        
     }
 
     return (
